@@ -25,4 +25,26 @@ public class UnidadAdminController {
     public UnidadAdmin guardar(@RequestBody UnidadAdmin unidadAdmin) {
         return service.guardar(unidadAdmin);
     }
+
+    @PutMapping("/{id}")
+    public UnidadAdmin actualizar(@PathVariable Long id,
+                                  @RequestBody UnidadAdmin unidadAdmin) {
+        return service.actualizar(id, unidadAdmin);
+    }
+
+    @DeleteMapping("/{id}")
+    public String eliminar(@PathVariable Long id) {
+        boolean eliminado = service.eliminar(id);
+
+        if (eliminado) {
+            return "Unidad eliminada correctamente";
+        }
+
+        return "Unidad no encontrada";
+    }
+
+    @GetMapping("/filtrar")
+    public List<UnidadAdmin> filtrar(@RequestParam String ciudad) {
+        return service.filtrarPorCiudad(ciudad);
+    }
 }
