@@ -1,13 +1,13 @@
-package com.example.ProyectoSis414;
+package mes.mes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProyectoSis414Application {
+public class MesApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProyectoSis414Application.class, args);
+		SpringApplication.run(MesApplication.class, args);
 	}
 
 }
