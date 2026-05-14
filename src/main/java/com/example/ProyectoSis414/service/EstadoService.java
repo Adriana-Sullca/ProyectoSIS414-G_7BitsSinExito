@@ -26,4 +26,13 @@ public class EstadoService {
     public void eliminar(Long id) {
         estados.removeIf(e -> e.getCodestado().equals(id));
     }
+    public Optional<Estado> actualizar(Long id, Estado estadoActualizado) {
+        Optional<Estado> existente = buscarPorId(id);
+        if (existente.isPresent()) {
+            Estado e = existente.get();
+            e.setNomestado(estadoActualizado.getNomestado());
+            return Optional.of(e);
+        }
+        return Optional.empty();
+    }
 }
