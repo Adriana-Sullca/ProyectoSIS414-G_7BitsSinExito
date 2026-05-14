@@ -1,4 +1,4 @@
-package mes.mes.dto;
+package com.example.ProyectoSis414.model;
 
 public class MesDTO {
 
@@ -6,11 +6,6 @@ public class MesDTO {
     private String nombre;
 
     public MesDTO() {
-    }
-
-    public MesDTO(Long id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
     }
 
     public Long getId() {

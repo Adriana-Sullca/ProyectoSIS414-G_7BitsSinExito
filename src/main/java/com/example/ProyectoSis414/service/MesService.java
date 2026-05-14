@@ -1,6 +1,6 @@
-package mes.mes.service;
+package com.example.ProyectoSis414.service;
 
-import mes.mes.dto.MesDTO;
+import com.example.ProyectoSis414.model.MesDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,15 +10,14 @@ import java.util.concurrent.atomic.AtomicLong;
 @Service
 public class MesService {
 
-    private List<MesDTO> lista = new ArrayList<>();
-    private AtomicLong id = new AtomicLong(1);
+    private final List<MesDTO> lista = new ArrayList<>();
+    private final AtomicLong id = new AtomicLong(1);
 
     public List<MesDTO> getAll() {
         return lista;
     }
 
     public MesDTO getById(Long idBuscado) {
-
         return lista.stream()
                 .filter(m -> m.getId().equals(idBuscado))
                 .findFirst()
@@ -26,15 +25,12 @@ public class MesService {
     }
 
     public MesDTO add(MesDTO mes) {
-
         mes.setId(id.getAndIncrement());
         lista.add(mes);
-
         return mes;
     }
 
     public MesDTO update(Long idBuscado, MesDTO nuevo) {
-
         MesDTO mes = getById(idBuscado);
 
         if (mes != null) {
