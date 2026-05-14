@@ -14,20 +14,25 @@ public class EstadoController {
     public EstadoController(EstadoService service) {
         this.service = service;
     }
-    @GetMapping
-    public List<Estado> listarTodos() {
-        return service.listarTodos();
-    }
-    @GetMapping("/{id}")
-    public Optional<Estado> buscarPorId(@PathVariable Long id) {
-        return service.buscarPorId(id);
-    }
-    @PostMapping
-    public Estado guardar(@RequestBody Estado estado) {
-        return service.guardar(estado);
+    @PutMapping("/{id}")
+    public Optional<Estado> actualizar(@PathVariable Long id, @RequestBody Estado estado) {
+        return service.actualizar(id, estado);
     }
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
         service.eliminar(id);
     }
+    @GetMapping
+    public List<Estado> listarTodos() {
+        return service.listarTodos();
+    }
+    @PostMapping
+    public Estado guardar(@RequestBody Estado estado) {
+        return service.guardar(estado);
+    }
+    @GetMapping("/{id}")
+    public Optional<Estado> buscarPorId(@PathVariable Long id) {
+        return service.buscarPorId(id);
+    }
+
 }
