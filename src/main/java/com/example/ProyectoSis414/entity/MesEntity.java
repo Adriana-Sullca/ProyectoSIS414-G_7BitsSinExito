@@ -1,4 +1,4 @@
-package com.example.ProyectoSis414.Entity;
+package com.example.ProyectoSis414.entity;
 
 import jakarta.persistence.*;
 
