@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/entidades")
+@CrossOrigin(origins = "*")
 public class EntidadController {
 
     private final EntidadService entidadService;
