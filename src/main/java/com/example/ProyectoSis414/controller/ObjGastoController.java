@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/objgastos")
+@CrossOrigin("*")
 public class ObjGastoController {
 
     private final ObjGastoService objGastoService;
