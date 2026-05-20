@@ -1,7 +1,14 @@
 package com.example.ProyectoSis414.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "entidades")
 public class Entidad {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private int gestion;
     private int entidad;
     private String descEnt;
@@ -9,12 +16,8 @@ public class Entidad {
 
     public Entidad() {}
 
-    public Entidad(int gestion, int entidad, String descEnt, String siglaEnt) {
-        this.gestion = gestion;
-        this.entidad = entidad;
-        this.descEnt = descEnt;
-        this.siglaEnt = siglaEnt;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public int getGestion() { return gestion; }
     public void setGestion(int gestion) { this.gestion = gestion; }

@@ -21,30 +21,20 @@ public class EntidadController {
     public List<Entidad> obtenerTodas() {
         return entidadService.obtenerTodas();
     }
-    
-    @GetMapping("/filtrar")
-    public List<Entidad> filtrar(
-            @RequestParam(required = false) Integer gestion,
-            @RequestParam(required = false) String siglaEnt) {
-        return entidadService.obtenerConFiltros(gestion, siglaEnt);
-    }
 
     @PostMapping
     public Entidad agregar(@RequestBody Entidad entidad) {
         return entidadService.agregar(entidad);
     }
 
-    @PutMapping("/{gestion}/{entidad}")
-    public Entidad actualizar(
-            @PathVariable int gestion,
-            @PathVariable int entidad,
-            @RequestBody Entidad entidadActualizada) {
-        return entidadService.actualizar(gestion, entidad, entidadActualizada);
+    @PutMapping("/{id}")
+    public Entidad actualizar(@PathVariable Long id, @RequestBody Entidad entidad) {
+        return entidadService.actualizar(id, entidad);
     }
 
-    @DeleteMapping("/{gestion}/{entidad}")
-    public String eliminar(@PathVariable int gestion, @PathVariable int entidad) {
-        boolean eliminado = entidadService.eliminar(gestion, entidad);
+    @DeleteMapping("/{id}")
+    public String eliminar(@PathVariable Long id) {
+        boolean eliminado = entidadService.eliminar(id);
         return eliminado ? "Entidad eliminada" : "Entidad no encontrada";
     }
 }
