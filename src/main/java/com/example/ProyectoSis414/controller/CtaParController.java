@@ -1,13 +1,13 @@
 package com.example.ProyectoSis414.controller;
 
-import com.example.ProyectoSis414.model.CtaPar;
+import com.example.ProyectoSis414.entity.CtaParEntity;
 import com.example.ProyectoSis414.service.CtaParService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
-@RequestMapping("/ctapar")
+@RequestMapping("/api/ctapar")
 public class CtaParController {
 
     private final CtaParService ctaParService;
@@ -17,33 +17,32 @@ public class CtaParController {
     }
 
     @GetMapping
-    public List<CtaPar> obtenerTodos() {
+    public List<CtaParEntity> obtenerTodos() {
         return ctaParService.obtenerTodos();
     }
 
     @GetMapping("/filtrar")
-    public List<CtaPar> filtrar(
-            @RequestParam(required = false) Integer codcont,
-            @RequestParam(required = false) Integer gestion) {
-        return ctaParService.obtenerConFiltros(codcont, gestion);
+    public List<CtaParEntity> obtenerConFiltros(@RequestParam(required = false) String codigo) {
+        return ctaParService.obtenerConFiltros(codigo);
     }
 
     @PostMapping
-    public CtaPar agregar(@RequestBody CtaPar ctaPar) {
+    public CtaParEntity agregar(@RequestBody CtaParEntity ctaPar) {
         return ctaParService.agregar(ctaPar);
     }
 
-    @PutMapping("/{codcont}/{partida}")
-    public CtaPar actualizar(
-            @PathVariable int codcont,
-            @PathVariable int partida,
-            @RequestBody CtaPar ctaParActualizado) {
-        return ctaParService.actualizar(codcont, partida, ctaParActualizado);
+    @PutMapping("/{id}")
+    public ResponseEntity<CtaParEntity> actualizar(@PathVariable Long id, @RequestBody CtaParEntity ctaPar) {
+        return ctaParService.actualizar(id, ctaPar)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{codcont}/{partida}")
-    public String eliminar(@PathVariable int codcont, @PathVariable int partida) {
-        boolean eliminado = ctaParService.eliminar(codcont, partida);
-        return eliminado ? "CtaPar eliminado" : "CtaPar no encontrado";
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        if (ctaParService.eliminar(id)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
