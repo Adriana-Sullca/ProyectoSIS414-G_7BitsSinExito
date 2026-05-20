@@ -1,12 +1,9 @@
 package com.example.ProyectoSis414.repository;
 
 import com.example.ProyectoSis414.model.Estado;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface EstadoRepository {
-    List<Estado> findAll();
-    Optional<Estado> findById(Long id);
-    Estado save(Estado estado);
-    void deleteById(Long id);
+@Repository
+public interface EstadoRepository extends JpaRepository<Estado, Long> {
 }
