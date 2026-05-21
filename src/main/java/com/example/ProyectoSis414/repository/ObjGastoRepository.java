@@ -1,9 +1,9 @@
 package com.example.ProyectoSis414.repository;
 
-import com.example.ProyectoSis414.entity.ObjGastoEntity;
+import com.example.ProyectoSis414.model.ObjGasto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ObjGastoRepository extends JpaRepository<ObjGastoEntity, Long> {
+public interface ObjGastoRepository extends JpaRepository<ObjGasto, Long> {
 }
