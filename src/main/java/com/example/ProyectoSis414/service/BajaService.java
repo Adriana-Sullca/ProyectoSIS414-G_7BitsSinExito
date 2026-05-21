@@ -1,48 +1,38 @@
 package com.example.ProyectoSis414.service;
+
 import com.example.ProyectoSis414.model.Baja;
+import com.example.ProyectoSis414.repository.BajaRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 @Service
 public class BajaService {
 
-        private final List<Baja> bajas = new ArrayList<>(List.of(
-                new Baja(1, "Disposición definitiva de bienes"),
-                new Baja(2, "Hurto, robo o pérdida fortuita"),
-                new Baja(3, "Mermas")));
+    private final BajaRepository bajaRepository;
 
-
-        public List<Baja> obtenerTodas() {
-            return bajas;
-        }
-
-        public List<Baja> obtenerConFiltros(Integer codbaja, String descbaja) {
-            return bajas.stream()
-                    .filter(b -> codbaja == null || b.getCodbaja() == codbaja)
-                    .filter(b -> descbaja == null || b.getDescbaja().equalsIgnoreCase(descbaja))
-                    .collect(Collectors.toList());
-        }
-
-        public Baja agregar(Baja baja) {
-            bajas.add(baja);
-            return baja;
-        }
-
-        public Baja actualizar(int codbajaId, Baja bajaActualizada) {
-            for (int i = 0; i < bajas.size(); i++) {
-                if (bajas.get(i).getCodbaja() == codbajaId) {
-                    bajas.set(i, bajaActualizada);
-                    return bajaActualizada;
-                }
-            }
-            return null;
-        }
-
-        public boolean eliminar(int codbaja) {
-            return bajas.removeIf(b -> b.getCodbaja() == codbaja);
-        }
+    public BajaService(BajaRepository bajaRepository) {
+        this.bajaRepository = bajaRepository;
     }
 
+    public List<Baja> obtenerTodos() {
+        return bajaRepository.findAll();
+    }
 
+    public Baja agregar(Baja baja) {
+        return bajaRepository.save(baja);
+    }
+
+    public Baja actualizar(Long id, Baja bajaActualizada) {
+        bajaActualizada.setCodbaja(id);
+        return bajaRepository.save(bajaActualizada);
+    }
+
+    public boolean eliminar(Long id) {
+        if (bajaRepository.existsById(id)) {
+            bajaRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+}
