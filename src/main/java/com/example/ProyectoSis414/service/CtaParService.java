@@ -1,6 +1,6 @@
 package com.example.ProyectoSis414.service;
 
-import com.example.ProyectoSis414.entity.CtaParEntity;
+import com.example.ProyectoSis414.model.CtaPar;
 import com.example.ProyectoSis414.repository.CtaParRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -16,22 +16,22 @@ public class CtaParService {
         this.ctaParRepository = ctaParRepository;
     }
 
-    public List<CtaParEntity> obtenerTodos() {
+    public List<CtaPar> obtenerTodos() {
         return ctaParRepository.findAll();
     }
 
-    public List<CtaParEntity> obtenerConFiltros(String codigo) {
-        List<CtaParEntity> todas = ctaParRepository.findAll();
+    public List<CtaPar> obtenerConFiltros(String codigo) {
+        List<CtaPar> todas = ctaParRepository.findAll();
         return todas.stream()
                 .filter(c -> codigo == null || c.getCodigo().equalsIgnoreCase(codigo))
                 .collect(Collectors.toList());
     }
 
-    public CtaParEntity agregar(CtaParEntity ctaPar) {
+    public CtaPar agregar(CtaPar ctaPar) {
         return ctaParRepository.save(ctaPar);
     }
 
-    public Optional<CtaParEntity> actualizar(Long id, CtaParEntity ctaParActualizado) {
+    public Optional<CtaPar> actualizar(Long id, CtaPar ctaParActualizado) {
         return ctaParRepository.findById(id).map(existente -> {
             existente.setCodigo(ctaParActualizado.getCodigo());
             existente.setDescripcion(ctaParActualizado.getDescripcion());

@@ -1,13 +1,15 @@
 package com.example.ProyectoSis414.controller;
 
-import com.example.ProyectoSis414.entity.CtaParEntity;
+import com.example.ProyectoSis414.model.CtaPar;
 import com.example.ProyectoSis414.service.CtaParService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("/api/ctapar")
+@CrossOrigin ( origins = "*")
 public class CtaParController {
 
     private final CtaParService ctaParService;
@@ -17,22 +19,22 @@ public class CtaParController {
     }
 
     @GetMapping
-    public List<CtaParEntity> obtenerTodos() {
+    public List<CtaPar> obtenerTodos() {
         return ctaParService.obtenerTodos();
     }
 
     @GetMapping("/filtrar")
-    public List<CtaParEntity> obtenerConFiltros(@RequestParam(required = false) String codigo) {
+    public List<CtaPar> obtenerConFiltros(@RequestParam(required = false) String codigo) {
         return ctaParService.obtenerConFiltros(codigo);
     }
 
     @PostMapping
-    public CtaParEntity agregar(@RequestBody CtaParEntity ctaPar) {
+    public CtaPar agregar(@RequestBody CtaPar ctaPar) {
         return ctaParService.agregar(ctaPar);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CtaParEntity> actualizar(@PathVariable Long id, @RequestBody CtaParEntity ctaPar) {
+    public ResponseEntity<CtaPar> actualizar(@PathVariable Long id, @RequestBody CtaPar ctaPar) {
         return ctaParService.actualizar(id, ctaPar)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
