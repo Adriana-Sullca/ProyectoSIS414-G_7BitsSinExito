@@ -11,41 +11,30 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class UnidadAdminController {
 
-    private final UnidadAdminService service;
+    private final UnidadAdminService unidadAdminService;
 
-    public UnidadAdminController(UnidadAdminService service) {
-        this.service = service;
+    public UnidadAdminController(UnidadAdminService unidadAdminService) {
+        this.unidadAdminService = unidadAdminService;
     }
 
     @GetMapping
-    public List<UnidadAdmin> listar() {
-        return service.listar();
+    public List<UnidadAdmin> obtenerTodos() {
+        return unidadAdminService.obtenerTodos();
     }
 
     @PostMapping
-    public UnidadAdmin guardar(@RequestBody UnidadAdmin unidadAdmin) {
-        return service.guardar(unidadAdmin);
+    public UnidadAdmin agregar(@RequestBody UnidadAdmin unidadAdmin) {
+        return unidadAdminService.agregar(unidadAdmin);
     }
 
     @PutMapping("/{id}")
     public UnidadAdmin actualizar(@PathVariable Long id,
                                   @RequestBody UnidadAdmin unidadAdmin) {
-        return service.actualizar(id, unidadAdmin);
+        return unidadAdminService.actualizar(id, unidadAdmin);
     }
 
     @DeleteMapping("/{id}")
-    public String eliminar(@PathVariable Long id) {
-        boolean eliminado = service.eliminar(id);
-
-        if (eliminado) {
-            return "Unidad eliminada correctamente";
-        }
-
-        return "Unidad no encontrada";
-    }
-
-    @GetMapping("/filtrar")
-    public List<UnidadAdmin> filtrar(@RequestParam String ciudad) {
-        return service.filtrarPorCiudad(ciudad);
+    public void eliminar(@PathVariable Long id) {
+        unidadAdminService.eliminar(id);
     }
 }
