@@ -1,6 +1,6 @@
 package com.example.ProyectoSis414.controller;
 
-import com.example.ProyectoSis414.entity.BajaEntity;
+import com.example.ProyectoSis414.model.Baja;
 import com.example.ProyectoSis414.service.BajaService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,33 +18,23 @@ public class BajaController {
     }
 
     @GetMapping
-    public List<BajaEntity> obtenerTodas() {
-        return bajaService.obtenerTodas();
-    }
-
-    @GetMapping("/filtrar")
-    public List<BajaEntity> filtrar(
-            @RequestParam(required = false) Integer codbaja,
-            @RequestParam(required = false) String descbaja) {
-        return bajaService.obtenerConFiltros(codbaja, descbaja);
+    public List<Baja> obtenerTodos() {
+        return bajaService.obtenerTodos();
     }
 
     @PostMapping
-    public BajaEntity agregar(@RequestBody BajaEntity nuevaBaja) {
-        return bajaService.agregar(nuevaBaja);
+    public Baja agregar(@RequestBody Baja baja) {
+        return bajaService.agregar(baja);
     }
 
-    @PutMapping("/{codbaja}")
-    public BajaEntity actualizar(
-            @PathVariable int codbaja,
-            @RequestBody BajaEntity bajaActualizada) {
-        return bajaService.actualizar(codbaja, bajaActualizada);
+    @PutMapping("/{id}")
+    public Baja actualizar(@PathVariable Long id, @RequestBody Baja baja) {
+        return bajaService.actualizar(id, baja);
     }
 
-    @DeleteMapping("/{codbaja}")
-    public String eliminar(@PathVariable int codbaja) {
-        boolean eliminado = bajaService.eliminar(codbaja);
+    @DeleteMapping("/{id}")
+    public String eliminar(@PathVariable Long id) {
+        boolean eliminado = bajaService.eliminar(id);
         return eliminado ? "Baja eliminada" : "Baja no encontrada";
     }
 }
-

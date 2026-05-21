@@ -1,37 +1,21 @@
 package com.example.ProyectoSis414.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "baja")
 public class Baja {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long codbaja;
+    private String descbaja;
 
-        private int codbaja;
-        private String descbaja;
+    public Baja() {}
 
+    public Long getCodbaja() { return codbaja; }
+    public void setCodbaja(Long codbaja) { this.codbaja = codbaja; }
 
-        public Baja() {
-        }
-
-
-        public Baja(int codbaja, String descbaja) {
-            this.codbaja = codbaja;
-            this.descbaja = descbaja;
-        }
-
-
-        public int getCodbaja() {
-            return codbaja;
-        }
-
-        public void setCodbaja(int codbaja) {
-            this.codbaja = codbaja;
-        }
-
-        public String getDescbaja() {
-            return descbaja;
-        }
-
-        public void setDescbaja(String descbaja) {
-            this.descbaja = descbaja;
-        }
-    }
-
-
+    public String getDescbaja() { return descbaja; }
+    public void setDescbaja(String descbaja) { this.descbaja = descbaja; }
+}
