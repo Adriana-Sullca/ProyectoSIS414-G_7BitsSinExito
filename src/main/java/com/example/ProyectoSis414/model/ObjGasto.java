@@ -1,18 +1,22 @@
 package com.example.ProyectoSis414.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "objgasto")
 public class ObjGasto {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private int gestion;
     private int partida;
     private String descrip;
 
     public ObjGasto() {}
 
-    public ObjGasto(int gestion, int partida, String descrip) {
-        this.gestion = gestion;
-        this.partida = partida;
-        this.descrip = descrip;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public int getGestion() { return gestion; }
     public void setGestion(int gestion) { this.gestion = gestion; }

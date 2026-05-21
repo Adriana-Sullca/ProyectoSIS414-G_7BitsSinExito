@@ -22,29 +22,19 @@ public class MesController {
         return mesService.obtenerTodos();
     }
 
-    // http://localhost:8080/meses/filtrar?mes=1&nommes=Enero
-    @GetMapping("/filtrar")
-    public List<Mes> filtrar(
-            @RequestParam(required = false) Integer mes,
-            @RequestParam(required = false) String nommes) {
-        return mesService.obtenerConFiltros(mes, nommes);
-    }
-
     @PostMapping
     public Mes agregar(@RequestBody Mes mes) {
         return mesService.agregar(mes);
     }
 
-    @PutMapping("/{mes}")
-    public Mes actualizar(
-            @PathVariable int mes,
-            @RequestBody Mes mesActualizado) {
-        return mesService.actualizar(mes, mesActualizado);
+    @PutMapping("/{id}")
+    public Mes actualizar(@PathVariable Long id, @RequestBody Mes mes) {
+        return mesService.actualizar(id, mes);
     }
 
-    @DeleteMapping("/{mes}")
-    public String eliminar(@PathVariable int mes) {
-        boolean eliminado = mesService.eliminar(mes);
+    @DeleteMapping("/{id}")
+    public String eliminar(@PathVariable Long id) {
+        boolean eliminado = mesService.eliminar(id);
         return eliminado ? "Mes eliminado" : "Mes no encontrado";
     }
 }
