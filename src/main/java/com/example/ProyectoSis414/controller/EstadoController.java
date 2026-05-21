@@ -1,6 +1,6 @@
 package com.example.ProyectoSis414.controller;
 
-import com.example.ProyectoSis414.entity.EstadoEntity;
+import com.example.ProyectoSis414.model.Estado;
 import com.example.ProyectoSis414.service.EstadoService;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,28 +9,28 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/estado")
-@CrossOrigin("*")
+@CrossOrigin(origins="*")
 public class EstadoController {
     private final EstadoService service;
     public EstadoController(EstadoService service) {
         this.service = service;
     }
     @GetMapping
-    public List<EstadoEntity> listarTodos(){
+    public List<Estado> listarTodos(){
         return service.listarTodos();
     }
     @GetMapping("/{id}")
-    public Optional<EstadoEntity> buscarPorId(@PathVariable Long id) {
+    public Optional<Estado> buscarPorId(@PathVariable Long id) {
 
         return service.buscarPorId(id);
     }
     @PostMapping
-    public EstadoEntity guardar(@RequestBody EstadoEntity estado) {
+    public Estado guardar(@RequestBody Estado estado) {
 
         return service.guardar(estado);
     }
     @PutMapping("/{id}")
-    public Optional<EstadoEntity> actualizar(@PathVariable Long id, @RequestBody EstadoEntity estado) {
+    public Optional<Estado> actualizar(@PathVariable Long id, @RequestBody Estado estado) {
         return service.actualizar(id, estado);
     }
     @DeleteMapping("/{id}")

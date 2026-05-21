@@ -1,6 +1,14 @@
 package com.example.ProyectoSis414.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "estado")
+
 public class Estado {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long codestado;
     private String nomestado;
