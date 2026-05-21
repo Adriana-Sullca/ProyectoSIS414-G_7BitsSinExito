@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/unidadadmin")
+@CrossOrigin(origins = "*")
 public class UnidadAdminController {
 
     private final UnidadAdminService service;
