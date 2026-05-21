@@ -1,23 +1,21 @@
 package com.example.ProyectoSis414.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "unidadadmin")
 public class UnidadAdmin {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String entidad;
     private String unidad;
     private String descripcion;
     private String ciudad;
 
     public UnidadAdmin() {
-    }
-
-    public UnidadAdmin(Long id, String entidad, String unidad,
-                       String descripcion, String ciudad) {
-        this.id = id;
-        this.entidad = entidad;
-        this.unidad = unidad;
-        this.descripcion = descripcion;
-        this.ciudad = ciudad;
     }
 
     public Long getId() {
