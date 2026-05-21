@@ -1,48 +1,38 @@
 package com.example.ProyectoSis414.service;
 
 import com.example.ProyectoSis414.model.Mes;
+import com.example.ProyectoSis414.repository.MesRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class MesService {
 
-    private List<Mes> meses = new ArrayList<>(List.of(
-            new Mes(1, "Enero"),
-            new Mes(2, "Febrero"),
-            new Mes(3, "Marzo")
-    ));
+    private final MesRepository mesRepository;
 
-    public List<Mes> obtenerTodos() {
-        return meses;
+    public MesService(MesRepository mesRepository) {
+        this.mesRepository = mesRepository;
     }
 
-    public List<Mes> obtenerConFiltros(Integer mes, String nommes) {
-        return meses.stream()
-                .filter(m -> mes == null || m.getMes() == mes)
-                .filter(m -> nommes == null || m.getNommes().equalsIgnoreCase(nommes))
-                .collect(Collectors.toList());
+    public List<Mes> obtenerTodos() {
+        return mesRepository.findAll();
     }
 
     public Mes agregar(Mes mes) {
-        meses.add(mes);
-        return mes;
+        return mesRepository.save(mes);
     }
 
-    public Mes actualizar(int mesId, Mes mesActualizado) {
-        for (int i = 0; i < meses.size(); i++) {
-            if (meses.get(i).getMes() == mesId) {
-                meses.set(i, mesActualizado);
-                return mesActualizado;
-            }
+    public Mes actualizar(Long id, Mes mesActualizado) {
+        mesActualizado.setId(id);
+        return mesRepository.save(mesActualizado);
+    }
+
+    public boolean eliminar(Long id) {
+        if (mesRepository.existsById(id)) {
+            mesRepository.deleteById(id);
+            return true;
         }
-        return null;
-    }
-
-    public boolean eliminar(int mesId) {
-        return meses.removeIf(m -> m.getMes() == mesId);
+        return false;
     }
 }
