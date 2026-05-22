@@ -1,7 +1,7 @@
 package com.example.ProyectoSis414.service;
 
 import com.example.ProyectoSis414.model.UnidadAdmin;
-import com.example.ProyectoSis414.repository.Unigit dadAdminRepository;
+import com.example.ProyectoSis414.repository.UnidadAdminRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
