@@ -1,38 +1,36 @@
 package com.example.ProyectoSis414.service;
 
 import com.example.ProyectoSis414.model.Estado;
+import com.example.ProyectoSis414.repository.EstadoRepository;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class EstadoService {
-    private final List<Estado> estados = new ArrayList<>();
-    private Long contador = 1L;
+    private final EstadoRepository repository;
 
-    public List<Estado> listarTodos() { return estados; }
-
-    public Optional<Estado> buscarPorId(Long id) {
-        return estados.stream().filter(e -> e.getCodestado().equals(id)).findFirst();
+    public EstadoService(EstadoRepository repository) {
+        this.repository = repository;
     }
 
-    public Estado guardar(Estado estado) {
-        estado.setCodestado(contador++);
-        estados.add(estado);
-        return estado;
+    public List<Estado> listar() {
+        return repository.findAll();
+    }
+
+    public Optional<Estado> buscarPorId(Long id) {
+        return repository.findById(id);
+    }
+
+    public Optional<Estado> actualizar(Long id, Estado estado) {
+        return repository.findById(id).map(e -> {
+            e.setNomestado(estado.getNomestado());
+            return repository.save(e);
+        });
     }
 
     public void eliminar(Long id) {
-        estados.removeIf(e -> e.getCodestado().equals(id));
-    }
-    public Optional<Estado> actualizar(Long id, Estado estadoActualizado) {
-        Optional<Estado> existente = buscarPorId(id);
-        if (existente.isPresent()) {
-            Estado e = existente.get();
-            e.setNomestado(estadoActualizado.getNomestado());
-            return Optional.of(e);
-        }
-        return Optional.empty();
+        repository.deleteById(id);
     }
 }

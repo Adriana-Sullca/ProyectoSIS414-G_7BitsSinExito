@@ -11,28 +11,28 @@ import java.util.Optional;
 @CrossOrigin("*")
 public class EstadoController {
     private final EstadoService service;
+
     public EstadoController(EstadoService service) {
         this.service = service;
     }
-    @PutMapping("/{id}")
-    public Optional<Estado> actualizar(@PathVariable Long id, @RequestBody Estado estado) {
-        return service.actualizar(id, estado);
-    }
-    @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable Long id) {
-        service.eliminar(id);
-    }
+
     @GetMapping
-    public List<Estado> listarTodos() {
-        return service.listarTodos();
+    public List<Estado> listar() {
+        return service.listar();
     }
-    @PostMapping
-    public Estado guardar(@RequestBody Estado estado) {
-        return service.guardar(estado);
-    }
+
     @GetMapping("/{id}")
     public Optional<Estado> buscarPorId(@PathVariable Long id) {
         return service.buscarPorId(id);
     }
 
+    @PutMapping("/{id}")
+    public Optional<Estado> actualizar(@PathVariable Long id, @RequestBody Estado estado) {
+        return service.actualizar(id, estado);
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable Long id) {
+        service.eliminar(id);
+    }
 }
