@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/estado")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class EstadoController {
     private final EstadoService service;
 
