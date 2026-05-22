@@ -4,6 +4,7 @@ import com.example.ProyectoSis414.model.CtaPar;
 import com.example.ProyectoSis414.service.CtaParService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
@@ -29,15 +30,30 @@ public class CtaParController {
     }
 
     @PostMapping
-    public CtaPar agregar(@RequestBody CtaPar ctaPar) {
-        return ctaParService.agregar(ctaPar);
+    public ResponseEntity<?> agregar(@RequestBody CtaPar ctaPar) {
+        try {
+            ctaPar.setId(null);
+            CtaPar nuevoCtaPar = ctaParService.agregar(ctaPar);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(nuevoCtaPar);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Error al registrar los datos: " + e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CtaPar> actualizar(@PathVariable Long id, @RequestBody CtaPar ctaPar) {
-        return ctaParService.actualizar(id, ctaPar)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<?> actualizar(@PathVariable Long id, @RequestBody CtaPar ctaPar) {
+        try {
+            ctaPar.setId(id);
+
+            return ctaParService.actualizar(id, ctaPar)
+                    .map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Error al actualizar la cuenta: " + e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
