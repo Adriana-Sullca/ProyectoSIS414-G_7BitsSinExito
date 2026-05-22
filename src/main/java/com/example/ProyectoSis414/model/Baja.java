@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 public class Baja {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codbaja;
     private String descbaja;
 
