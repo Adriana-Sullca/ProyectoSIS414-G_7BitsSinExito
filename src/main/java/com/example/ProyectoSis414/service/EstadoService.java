@@ -34,6 +34,7 @@ public class EstadoService {
         repository.deleteById(id);
     }
     public Estado crear(Estado estado) {
+        estado.setCodestado(null);
         return repository.save(estado);
     }
 }
