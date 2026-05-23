@@ -35,5 +35,3 @@ out/
 
 ### VS Code ###
 .vscode/
-### Configuración Local de Base de Datos ###
-src/main/resources/application.properties
