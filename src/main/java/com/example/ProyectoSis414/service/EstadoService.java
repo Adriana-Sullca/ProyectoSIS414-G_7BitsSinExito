@@ -33,4 +33,7 @@ public class EstadoService {
     public void eliminar(Long id) {
         repository.deleteById(id);
     }
+    public Estado crear(Estado estado) {
+        return repository.save(estado);
+    }
 }
