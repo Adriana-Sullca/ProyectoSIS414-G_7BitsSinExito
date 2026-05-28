@@ -14,25 +14,26 @@ public class EntidadService {
     public EntidadService(EntidadRepository entidadRepository) {
         this.entidadRepository = entidadRepository;
     }
-
     public List<Entidad> obtenerTodas() {
         return entidadRepository.findAll();
     }
-
-    public Entidad agregar(Entidad entidad) {
+    public Entidad guardarNuevaEntidad(Entidad entidad) {
         return entidadRepository.save(entidad);
     }
 
-    public Entidad actualizar(Long id, Entidad entidadActualizada) {
-        entidadActualizada.setId(id);
-        return entidadRepository.save(entidadActualizada);
+    public Entidad actualizarEntidad(Long id, Entidad entidad) {
+        if(!entidadRepository.existsById(id)){
+            throw new RuntimeException("Entidad no encontrada con id: "+ id);
+        }
+        entidad.setId(id);
+        return entidadRepository.save(entidad);
     }
 
-    public boolean eliminar(Long id) {
-        if (entidadRepository.existsById(id)) {
-            entidadRepository.deleteById(id);
-            return true;
+    public boolean eliminarEntidad(Long id) {
+        if (!entidadRepository.existsById(id)) {
+            return false;
         }
-        return false;
+        entidadRepository.deleteById(id);
+        return true;
     }
 }

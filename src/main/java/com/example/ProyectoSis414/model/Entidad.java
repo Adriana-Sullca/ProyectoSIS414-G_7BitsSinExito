@@ -1,6 +1,8 @@
 package com.example.ProyectoSis414.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "entidades")
@@ -8,7 +10,9 @@ public class Entidad {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
+
     private int gestion;
     private int entidad;
     private String descEnt;
