@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 public class Estado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codestado", insertable = false, updatable = false)
+
     private Long codestado;
     private String nomestado;
 

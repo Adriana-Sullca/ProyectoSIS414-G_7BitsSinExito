@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/estado")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class EstadoController {
     private final EstadoService service;
 
@@ -30,7 +30,10 @@ public class EstadoController {
     public Optional<Estado> actualizar(@PathVariable Long id, @RequestBody Estado estado) {
         return service.actualizar(id, estado);
     }
-
+    @PostMapping
+    public Estado crear(@RequestBody Estado estado) {
+        return service.crear(estado);
+    }
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
         service.eliminar(id);
