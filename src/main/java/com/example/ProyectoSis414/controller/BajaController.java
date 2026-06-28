@@ -28,12 +28,12 @@ public class BajaController {
     }
 
     @PutMapping("/{id}")
-    public Baja actualizar(@PathVariable Long id, @RequestBody Baja baja) {
+    public Baja actualizar(@PathVariable Integer id, @RequestBody Baja baja) {
         return bajaService.actualizar(id, baja);
     }
 
     @DeleteMapping("/{id}")
-    public String eliminar(@PathVariable Long id) {
+    public String eliminar(@PathVariable Integer id) {
         boolean eliminado = bajaService.eliminar(id);
         return eliminado ? "Baja eliminada" : "Baja no encontrada";
     }

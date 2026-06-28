@@ -23,12 +23,12 @@ public class BajaService {
         return bajaRepository.save(baja);
     }
 
-    public Baja actualizar(Long id, Baja bajaActualizada) {
+    public Baja actualizar(Integer id, Baja bajaActualizada) {
         bajaActualizada.setCodbaja(id);
         return bajaRepository.save(bajaActualizada);
     }
 
-    public boolean eliminar(Long id) {
+    public boolean eliminar(Integer id) {
         if (bajaRepository.existsById(id)) {
             bajaRepository.deleteById(id);
             return true;
